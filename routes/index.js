@@ -28,7 +28,7 @@ router.get('/artista/:id', function (req, res, next) {
 router.get('/playlist/:id', function (req, res, next) {
   nm.artist(req.params.id).then(data => {
 
-    const url = req.protocol + '://' + req.get('host');
+    const url = req.protocol + '://' + req.get('host') + '/';
 
     const head = '#EXTM3U' + '\n';
 
