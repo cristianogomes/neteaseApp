@@ -35,7 +35,7 @@ router.get('/playlist/:id', function (req, res, next) {
     var body = '';
     data.hotSongs.forEach(function (musica) {
       body += '#EXTINF: 0, ' + 'Bob Dylan - ' + musica.name + '\n';
-      body += url + musica.id + '\n';
+      body += url + '/musica/' + musica.id + '\n';
     })
 
     res.setHeader('Content-type', "application/octet-stream");
