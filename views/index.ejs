@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+
+    <form action="/buscar" method="post">
+      <label for="artista">Enter name: </label>
+      <input id="artista" type="text" name="artista" value="">
+      <input type="submit" value="OK">
+  </form>
+  
+  <% if (locals.artistas) { %>
+    <h2>Resultado</h2>
+    <ul>
+        <% artistas.forEach(function(artista) { %>
+            <li><a href="/artista/<%= artista.id %>"><%= artista.name %></a> / <a href="/playlist/<%= artista.id %>">playlist</a></li>
+        <% }); %>
+    </ul>
+  <% } %>
+
+  <% if (locals.musicas) { %>
+    <h2>Musicas</h2>
+    <ul>
+        <% musicas.forEach(function(musica) { %>
+            <li><a href="/musica/<%= musica.id %>"><%= musica.name %></a></li>
+        <% }); %>
+    </ul>
+  <% } %>
+
+
+
+  </body>
+</html>
+
+
