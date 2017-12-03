@@ -28,12 +28,14 @@ router.get('/artista/:id', function (req, res, next) {
 router.get('/playlist/:id', function (req, res, next) {
   nm.artist(req.params.id).then(data => {
 
+    const url = req.protocol + '://' + req.get('host');
+
     const head = '#EXTM3U' + '\n';
 
     var body = '';
     data.hotSongs.forEach(function (musica) {
       body += '#EXTINF: 0, ' + 'Bob Dylan - ' + musica.name + '\n';
-      body += 'http://localhost:3000/musica/' + musica.id + '\n';
+      body += url + musica.id + '\n';
     })
 
     res.setHeader('Content-type', "application/octet-stream");
