@@ -2,39 +2,60 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <div class="container">
+      <div class="header clearfix">
+        <h3 class="text-muted"><%= title %></h3>
+      </div>
 
-    <form action="/buscar" method="post">
-      <label for="artista">Enter name: </label>
-      <input id="artista" type="text" name="artista" value="">
-      <input type="submit" value="OK">
-  </form>
-  
-  <% if (locals.artistas) { %>
-    <h2>Resultado</h2>
-    <ul>
+      <div class="jumbotron">
+        <h1 style="text-align: center;">Welcome to <%= title %></h1>
+      </div>
+      
+      <div class="row">
+        <form action="/buscar" method="post">
+          <div class="col-lg-6">
+            <div class="input-group">
+              <input id="artista" name="artista" type="text" value="" class="form-control" placeholder="buscar..." />
+              <span class="input-group-btn">
+                <input type="submit" class="btn btn-success" value="Buscar" />
+              </span>
+              <br/>
+            </div>
+            <input type="radio" name="type" value="1000" checked> Musica
+            <input type="radio" name="type" value="100"> Artista
+            <input type="radio" name="type" value="10"> Album
+          </div>
+        </form>
+      </div>
+      
+      <% if (locals.artistas) { %>
+        <h2>Resultado</h2>
         <% artistas.forEach(function(artista) { %>
-            <li><a href="/artista/<%= artista.id %>"><%= artista.name %></a> / <a href="/playlist/<%= artista.id %>">playlist</a></li>
+          <div class="media">
+            <div class="media-left media-top">
+              <img class="media-object" src="<%= artista.picUrl %>" width="64px;" height="64px;">
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading"><a href="/artista/<%= artista.id %>"><%= artista.name %></a></h4>
+              <a href="/playlist/<%= artista.id %>">playlist</a><br/>
+              <a href="/hotSongs/<%= artista.id %>">hotSongs</a>
+            </div>
+          </div>
         <% }); %>
-    </ul>
-  <% } %>
-
-  <% if (locals.musicas) { %>
-    <h2>Musicas</h2>
-    <ul>
-        <% musicas.forEach(function(musica) { %>
+      <% } %>
+      
+      <% if (locals.musicas) { %>
+        <h2>Musicas</h2>
+        <ul>
+          <% musicas.forEach(function(musica) { %>
             <li><a href="/musica/<%= musica.id %>"><%= musica.name %></a></li>
-        <% }); %>
-    </ul>
-  <% } %>
-
-
-
+          <% }); %>
+        </ul>
+      <% } %>
+    </div>
   </body>
 </html>
-
-

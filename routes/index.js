@@ -13,7 +13,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/buscar', function (req, res, next) {
-  nm.search(req.body.artista, 100, 1, 10).then(data => {
+  nm.search(req.body.artista, req.body.type, 1, 10).then(data => {
+    console.log(data.result)
     res.render('index', { title: 'Express', artistas: data.result.artists });
   });
 });
@@ -70,7 +71,7 @@ router.get('/musica/:id', function (req, res, next) {
   });
 });
 
-/*
+
 router.get('/hotSongs/:id', function (req, res, next) {
   nm.artist(req.params.id).then(data => {
     return data.hotSongs;
@@ -112,21 +113,11 @@ router.get('/hotSongs/:id', function (req, res, next) {
     }).then(musicas => {
 
 
-      const head = '#EXTM3U' + '<br/>';
-
-      var body = '';
-      musicas.forEach(function (item) {
-        body += '#EXTINF:' + item.music.id + ', ' + item.artist.name + ' - ' + item.music.name + '<br/>';
-        body += item.music.url + '<br/>';
-      })
-
-      console.log(head + body);
-
-      res.render('index', { title: 'Express', playlist: (head + body) })
+      res.send(musicas)
     });
   });
 });
-*/
+
 
 
 module.exports = router;
